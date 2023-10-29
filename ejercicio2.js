@@ -2,6 +2,7 @@
 
 document.write(`<h3>Ejecicio 2</h3>`);
 
+// Creación clase Zombi
 class Zombi {
 	constructor(nombre, puntosVida, potencia) {
 		this.nombre = nombre;
@@ -13,6 +14,7 @@ class Zombi {
 	}
 }
 
+// Creación clase Jugador
 class Jugador {
 	constructor(nombre, ocupacion, puntosVida, faccion) {
 		this.nombre = nombre;
@@ -22,9 +24,11 @@ class Jugador {
 	}
 }
 
+// Creación jugadores
 let jugador1 = new Jugador("Julio", "Cazador", 80, "Humanos");
 let jugador2 = new Jugador("Sara", "Médico", 110, "Aliados");
 
+// Creación clase Abominación
 class Abominacion extends Zombi {
 	constructor(nombre, puntosVida, potencia) {
 		super(nombre, puntosVida, potencia);
@@ -37,6 +41,8 @@ class Abominacion extends Zombi {
 	}
 }
 
+// Creación monstruo
 let abominacion = new Abominacion("Abominación", 150, 20);
 
+// Imprimimos resultado
 abominacion.ataqueMultiple(jugador1.nombre);

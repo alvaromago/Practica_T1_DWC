@@ -2,6 +2,7 @@
 
 document.write(`<h3>Ejecicio 3</h3>`);
 
+// Creación clase Consumible
 class Consumible {
 	constructor(nombre) {
 		this.nombre = nombre;
@@ -10,7 +11,10 @@ class Consumible {
 		document.write(`<p>${jugador.nombre} consume ${this.nombre} y no tiene ningún efecto</p>`);
 	}
 }
+
+// Creación consumible
 let manzana = new Consumible("manzana");
+
 let ricardo = {
 	nombre: "Ricardo",
 	potencia: 1,
@@ -40,6 +44,8 @@ class PlantaCurativa extends Consumible {
 	}
 }
 
+// Creación planta curativa
 let jengibre = new PlantaCurativa("jengibre", 5);
 
+// Imprimimos el resultado
 ricardo.consumir(jengibre);
