@@ -2,48 +2,44 @@
 
 document.write(`<h3>Ejecicio 3</h3>`);
 
-class Zombi {
-	constructor(nombre, puntosVida, potencia) {
+class Consumible {
+	constructor(nombre) {
 		this.nombre = nombre;
-		this.puntosVida = puntosVida;
-		this.potencia = potencia;
 	}
-	atacar(objetivo) {
-		document.write(`<p>${this.nombre} ataca a ${objetivo} y le causa ${this.potencia} puntos de daño</p>`);
+	consumir(jugador) {
+		document.write(`<p>${jugador.nombre} consume ${this.nombre} y no tiene ningún efecto</p>`);
 	}
 }
+let manzana = new Consumible("manzana");
+let ricardo = {
+	nombre: "Ricardo",
+	potencia: 1,
+	puntosVida: 6,
+	maxPuntosVida: 10,
+	consumir: function (consumible) {
+		consumible.consumir(this);
+	},
+};
+ricardo.consumir(manzana);
 
-class Jugador {
-	constructor(nombre, ocupacion, puntosVida, faccion) {
-		this.nombre = nombre;
-		this.ocupacion = ocupacion;
-		this.puntosVida = puntosVida > 100 ? 100 : puntosVida;
-		this.faccion = faccion;
+// Clase Planta Curativa
+class PlantaCurativa extends Consumible {
+	constructor(nombre, poder) {
+		super(nombre);
+		this.poder = poder;
 	}
 
-	toString() {
-		document.write(`<p>${this.nombre} - Ocupación: ${this.ocupacion}, Puntos de Vida: ${this.puntosVida}, Facción: ${this.faccion}</p>`);
-	}
-}
-
-let jugador1 = new Jugador("Julio", "Cazador", 80, "Humanos");
-let jugador2 = new Jugador("Sara", "Médico", 110, "Aliados");
-
-jugador1.toString();
-jugador2.toString();
-
-class Abominacion extends Zombi {
-	constructor(nombre, puntosVida, potencia) {
-		super(nombre, puntosVida, potencia);
-	}
-
-	ataqueMultiple(objetivo) {
-		for (let i = 0; i < 3; i++) {
-			super.atacar(objetivo);
+	consumir(jugador) {
+		if (this.poder + jugador.puntosVida > jugador.maxPuntosVida) {
+			jugador.puntosVida = jugador.maxPuntosVida;
+		} else {
+			jugador.puntosVida += this.poder;
 		}
+
+		document.write(`<p>${jugador.nombre} consume ${this.nombre} y ahora tiene ${jugador.puntosVida} puntos de vida</p>`);
 	}
 }
 
-let abominacion = new Abominacion("Abominacion", 150, 20);
+let jengibre = new PlantaCurativa("jengibre", 5);
 
-abominacion.ataqueMultiple(jugador1.nombre);
+ricardo.consumir(jengibre);
